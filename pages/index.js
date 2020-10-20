@@ -41,7 +41,7 @@ export default function Home() {
 
   const copyToClipboard = (min) => {
     const val = textareaVal(min);
-    copy(val);
+    copy(val, { format: 'text/plain' });
     notification.open({
       message: 'Copied!',
       description: (<h2><FieldTimeOutlined />{min}น.<SwapRightOutlined />{renderTitle(min, employee)}</h2>),
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
 
         <Row>
-          {[5,10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map(min => renderList(min))}
+          {[5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map(min => renderList(min))}
         </Row>
       </main>
     </div>
