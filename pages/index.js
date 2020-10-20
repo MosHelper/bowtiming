@@ -81,6 +81,8 @@ export default function Home() {
         <title>BowTiming - แบ่งช่วงเวลาทำงาน</title>
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="BowTiming - แบ่งช่วงเวลาทำงาน" />
+        <meta property="og:image" content="https://bowtiming.vercel.app/bg.png" />
+
       </Head>
 
       <main>
