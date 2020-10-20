@@ -28,7 +28,7 @@ h2 {
 }
 div#params {
   padding: 20px;
-  background: #e91e63;
+  background: #000000d6;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -44,4 +44,16 @@ span.brand {
   font-size: 25px;
   margin-right: 10px;
   color: white;
+}
+body {
+  background-image: url(/bg.png);
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.ant-list.ant-list-split.ant-list-bordered {
+  background-color: #ffffffde;
+  box-shadow: 0px 0px 16px #00000021;
+  border-radius: 12px;
 }

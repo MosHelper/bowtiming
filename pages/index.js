@@ -1,13 +1,16 @@
 const moment = require('moment');
-import { Col, InputNumber, Row, TimePicker } from 'antd'
+import { Button, Col, InputNumber, notification, Row, TimePicker } from 'antd'
 import { List } from 'antd';
 import Head from 'next/head'
 import { useState } from 'react';
 import {
   FieldTimeOutlined,
   SwapRightOutlined,
-  UserSwitchOutlined
+  UserSwitchOutlined,
+  CopyOutlined,
+  CheckCircleOutlined
 } from '@ant-design/icons';
+import copy from "copy-to-clipboard";
 
 export default function Home() {
   const format = 'HH:mm';
@@ -36,6 +39,24 @@ export default function Home() {
     return sTime.add(mm, 'minutes').format(format);
   }
 
+  const copyToClipboard = (min) => {
+    const val = textareaVal(min);
+    copy(val);
+    notification.open({
+      message: 'Copied!',
+      description: (<h2><FieldTimeOutlined />{min}น.<SwapRightOutlined />{renderTitle(min, employee)}</h2>),
+      icon: <CheckCircleOutlined style={{ color: '#009688' }} />,
+    });
+  }
+
+  const textareaVal = (min) => {
+    let str = "";
+    for (let index = 1; index <= employee.length; index++) {
+      str += renderT(min, index) + "\n";
+    }
+    return str;
+  }
+
   const renderList = (min) => {
     return (startTime !== '' && employee !== '')
       ? (
@@ -43,6 +64,7 @@ export default function Home() {
           <List
             bordered
             header={<h2><FieldTimeOutlined />{min}น.<SwapRightOutlined />{renderTitle(min, employee)}</h2>}
+            footer={<Button type="primary" shape="round" icon={<CopyOutlined />} onClick={e => copyToClipboard(min)} block size="large">Copy</Button>}
             dataSource={employee}
             renderItem={(i) => (
               <List.Item key={i}>{renderT(min, i)}</List.Item>
@@ -69,7 +91,7 @@ export default function Home() {
         </div>
 
         <Row>
-          {[10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map(min => renderList(min))}
+          {[5,10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map(min => renderList(min))}
         </Row>
       </main>
     </div>
