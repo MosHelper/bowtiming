@@ -8,7 +8,8 @@ import {
   SwapRightOutlined,
   UserSwitchOutlined,
   CopyOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
+  PlusCircleOutlined
 } from '@ant-design/icons';
 import copy from "copy-to-clipboard";
 
@@ -16,6 +17,8 @@ export default function Home() {
   const format = 'HH:mm';
   const [startTime, setStartTime] = useState('');
   const [employee, setEmployee] = useState('');
+  const [forstep, setForstep] = useState([])
+  const [step, setStep] = useState(5)
 
   const handleEmp = (emp) => {
     const arrEmp = [];
@@ -23,6 +26,16 @@ export default function Home() {
       arrEmp.push(i);
     }
     setEmployee(arrEmp);
+    handleStep(step);
+  }
+
+  const handleStep = (step) => {
+    const forStep = []
+    for (let i = 0; i <= 60; i += step) {
+      forStep.push(i)
+    }
+    setStep(step)
+    setForstep(forStep)
   }
 
   const renderT = (m, i) => {
@@ -90,10 +103,11 @@ export default function Home() {
           <span className="brand">BowTiming</span>
           <UserSwitchOutlined className="userIcon" /><InputNumber onChange={handleEmp} min="1" size="large" />
           <TimePicker format={format} onChange={setStartTime} placeholder="Start At" size="large" />
+          <div style={{ marginLeft: 20, 'color': 'white' }}><PlusCircleOutlined /> เพิ่มทีละ <InputNumber onChange={handleStep} defaultValue={step} placeholder="Step" min="1" size="large" /> นาที</div>
         </div>
 
         <Row>
-          {[5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].map(min => renderList(min))}
+          {forstep.map(min => renderList(min))}
         </Row>
       </main>
     </div>
